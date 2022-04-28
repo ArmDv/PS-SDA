@@ -1,38 +1,40 @@
-# include <stdio.h>
-# include <math.h>
-
-// Functia pentru printarea factorilor primi ai unui numar N 
-void factoriPrimi(int n)
-{
-	//Printam numarul de "2" care divide n
-	while (n % 2 == 0)
-	{
-		printf("%d ", 2);
-		n = n / 2;
-	}
-
-	// n trebuie sa fie impar in acest punct
-	// incep un loop de la i=3 la sqrt din n
-	for (int i = 3; i <= sqrt(n); i = i + 2)
-	{
-		// Cat timp i se divide la n, se printeaza i si se divide iar la n
-		while (n%i == 0)
-		{
-			printf("%d ", i);
-			n = n / i;
-		}
-	}
-
-	// Tratarea conditiei in care n este un numar prim mai mare ca 2 
-	if (n > 2)
-		printf("%d ", n);
-
-	
-}
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
 
 int main()
 {
-	int n = 315;
-	factoriPrimi(n);
+	int i, j, num, Prim;
+
+	/* Citire de la tastatura */
+	printf("Introduceti un numar: ");
+	scanf("%d", &num);
+
+	printf("Factorii primi ai numarului %d sunt: \n", num);
+
+	/*Cautarea tuturor factorilor primi */
+	for (i = 2; i <= num; i++)
+	{
+		/* Verificam daca i este factor prim al numarului  */
+		if (num%i == 0)
+		{
+			/* Verificam daca i este prim */
+			Prim = 1;
+			for (j = 2; j <= i / 2; j++)
+			{
+				if (i%j == 0)
+				{
+					Prim = 0;
+					break;
+				}
+			}
+
+			/* Afisez valoare lui i daca acesta este prim si un factor al numarului */
+			if (Prim == 1)
+			{
+				printf("%d, ", i);
+			}
+		}
+	}
+
 	return 0;
 }
